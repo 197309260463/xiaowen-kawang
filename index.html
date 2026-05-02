@@ -88,42 +88,10 @@
             font-size: 1.2rem;
             cursor: pointer;
             text-align: center;
+            text-decoration: none;
         }
         .buy-btn:hover {
             opacity: 0.9;
-        }
-        /* 弹窗样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
-        .modal-content {
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .modal img {
-            max-width: 300px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .modal .close-btn {
-            padding: 10px 30px;
-            background: #ff6b35;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -133,7 +101,7 @@
         <p>24小时自助购卡 | 自动发卡 | 粉丝专属</p>
     </div>
     <div class="notice">
-        收款方：洗头师傅应咉，有问题联系客服处理！
+        收款方：洗头师傅应咉，有问题联系客服QQ 2557068271 处理！
     </div>
     <div class="tabs">
         <div class="tab-item active" onclick="switchPage(0)">购卡中心</div>
@@ -144,39 +112,29 @@
         <div class="goods-card">
             <h3 class="goods-title">小文回关</h3>
             <p class="goods-desc">小文专属回关福利，粉丝专属特权，购卡立即生效</p>
-            <div class="goods-price">¥19.9</div>
-            <button class="buy-btn" onclick="showPayCode()">立即购买</button>
+            <div class="goods-price">¥9.9</div>
+            <a href="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns3rl27e/498e9280994b44969320179111072062~tplv-a9rns3rl27e-image.image" class="buy-btn">立即购买</a>
         </div>
         <div class="goods-card">
             <h3 class="goods-title">哈哈公主回关</h3>
             <p class="goods-desc">购买后哈哈公主主动回关，永久有效，秒处理</p>
             <div class="goods-price">¥199.9</div>
-            <button class="buy-btn" onclick="showPayCode()">立即购买</button>
+            <a href="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns3rl27e/498e9280994b44969320179111072062~tplv-a9rns3rl27e-image.image" class="buy-btn">立即购买</a>
         </div>
         <div class="goods-card">
             <h3 class="goods-title">大王回关</h3>
             <p class="goods-desc">大王专属回关服务，购卡即安排，稳定靠谱</p>
             <div class="goods-price">¥399.9</div>
-            <button class="buy-btn" onclick="showPayCode()">立即购买</button>
+            <a href="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns3rl27e/498e9280994b44969320179111072062~tplv-a9rns3rl27e-image.image" class="buy-btn">立即购买</a>
         </div>
     </div>
 
     <div class="tab-content" id="tab1">
         <div class="goods-card">
             <h3 class="goods-title">密钥激活</h3>
-            <p class="goods-desc">购买后请联系客服QQ获取激活码</p>
+            <p class="goods-desc">购买后请联系客服QQ 2557068271获取激活码</p>
             <input type="text" placeholder="请输入激活码" style="width:100%;padding:12px;margin:15px 0;border-radius:8px;border:none;">
             <button class="buy-btn">立即激活</button>
-        </div>
-    </div>
-
-    <!-- 收款码弹窗 -->
-    <div class="modal" id="payModal">
-        <div class="modal-content">
-            <img src="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns3rl27e/498e9280994b44969320179111072062~tplv-a9rns3rl27e-image.image" alt="微信收款码">
-            <p>付款后请联系客服QQ 2557068271 确认订单</p>
-            <br>
-            <button class="close-btn" onclick="closePayCode()">已付款，关闭</button>
         </div>
     </div>
 
@@ -190,16 +148,6 @@
             pages.forEach((e,i)=>{
                 e.classList.toggle('show', i==idx);
             });
-        }
-
-        // 显示收款码弹窗
-        function showPayCode(){
-            document.getElementById('payModal').style.display = 'flex';
-        }
-
-        // 关闭弹窗
-        function closePayCode(){
-            document.getElementById('payModal').style.display = 'none';
         }
     </script>
 </body>
