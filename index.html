@@ -43,7 +43,6 @@
             text-align: center;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: all 0.3s;
         }
         .tab-item.active {
             color: #ff6b35;
@@ -86,40 +85,31 @@
             border-radius: 8px;
             color: white;
             font-size: 1.2rem;
-            cursor: pointer;
             text-align: center;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
+        /* 收款码弹窗 */
+        .pay-pop{
+            display:none;
+            position:fixed;
+            left:0;top:0;
+            width:100%;height:100%;
+            background:rgba(0,0,0,0.9);
+            z-index:999;
+            text-align:center;
+            padding-top:80px;
         }
-        .modal-content {
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
+        .pay-pop img{
+            width:280px;
+            border-radius:10px;
         }
-        .modal img {
-            max-width: 300px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .close-btn {
-            padding: 10px 30px;
-            background: #ff6b35;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
+        .close-pop{
+            margin-top:20px;
+            padding:10px 25px;
+            background:#ff6b35;
+            border:none;
+            color:#fff;
+            border-radius:6px;
+            font-size:16px;
         }
     </style>
 </head>
@@ -141,19 +131,19 @@
             <h3 class="goods-title">小文回关</h3>
             <p class="goods-desc">小文专属回关福利，粉丝专属特权，购卡立即生效</p>
             <div class="goods-price">¥9.9</div>
-            <button class="buy-btn" onclick="showPay()">立即购买</button>
+            <button class="buy-btn" onclick="openPay()">立即购买</button>
         </div>
         <div class="goods-card">
             <h3 class="goods-title">哈哈公主回关</h3>
             <p class="goods-desc">购买后哈哈公主主动回关，永久有效，秒处理</p>
             <div class="goods-price">¥199.9</div>
-            <button class="buy-btn" onclick="showPay()">立即购买</button>
+            <button class="buy-btn" onclick="openPay()">立即购买</button>
         </div>
         <div class="goods-card">
             <h3 class="goods-title">大王回关</h3>
             <p class="goods-desc">大王专属回关服务，购卡即安排，稳定靠谱</p>
             <div class="goods-price">¥399.9</div>
-            <button class="buy-btn" onclick="showPay()">立即购买</button>
+            <button class="buy-btn" onclick="openPay()">立即购买</button>
         </div>
     </div>
 
@@ -166,14 +156,11 @@
         </div>
     </div>
 
-    <!-- 内嵌收款码弹窗，稳定不会失效 -->
-    <div class="modal" id="payModal">
-        <div class="modal-content">
-            <img src="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns3rl27e/498e9280994b44969320179111072062~tplv-a9rns3rl27e-image.image" alt="微信收款码">
-            <p>付款后请联系客服QQ 2557068271 确认订单</p>
-            <br>
-            <button class="close-btn" onclick="closePay()">已付款，关闭</button>
-        </div>
+    <!-- 收款码弹窗 不用跳转网页 直接弹出 -->
+    <div class="pay-pop" id="payPop">
+        <img src="mm_facetoface_collect_qrcode_1777561335297.png">
+        <p style="color:#ccc;margin-top:15px;">付款后联系QQ：2557068271</p>
+        <button class="close-pop" onclick="closePay()">关闭</button>
     </div>
 
     <script>
@@ -187,11 +174,11 @@
                 e.classList.toggle('show', i==idx);
             });
         }
-        function showPay(){
-            document.getElementById('payModal').style.display = 'flex';
+        function openPay(){
+            document.getElementById("payPop").style.display = "block";
         }
         function closePay(){
-            document.getElementById('payModal').style.display = 'none';
+            document.getElementById("payPop").style.display = "none";
         }
     </script>
 </body>
