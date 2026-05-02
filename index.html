@@ -1,283 +1,154 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>小文粉丝购买平台</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif;-webkit-tap-highlight-color:transparent;}
-body{background:#0F0F12;color:#fff;}
-
-/* 顶部 */
-.header{
-background:#17171A;
-padding:22px 15px;
-text-align:center;
-border-bottom:1px solid #2A2A2F;
-position:sticky;top:0;z-index:99;
-}
-.header h1{
-font-size:24px;
-color:#FF4400;
-margin-bottom:6px;
-}
-.header p{
-font-size:13px;color:#888;}
-
-/* 公告栏 */
-.notice{
-background:#1A1A1F;
-border-left:4px solid #FF4400;
-padding:12px 15px;
-margin:15px;
-border-radius:6px;
-font-size:14px;
-color:#FFCC00;
-line-height:1.4;
-}
-
-/* 导航菜单 */
-.nav{
-display:flex;
-background:#1A1A1F;
-border-bottom:1px solid #2A2A2F;
-}
-.nav .item{
-flex:1;
-text-align:center;
-padding:12px 0;
-font-size:15px;
-cursor:pointer;
-color:#ccc;
-}
-.nav .item.active{
-color:#FF4400;
-font-weight:bold;
-border-bottom:2px solid #FF4400;
-}
-
-/* 页面容器 */
-.container{
-max-width:420px;
-margin:0 auto;
-padding:10px 12px 30px 12px;
-display:none;
-}
-.container.show{display:block;}
-
-/* 商品卡片 */
-.goods-item{
-background:#1A1A1F;
-border:1px solid #2A2A2F;
-border-radius:12px;
-padding:20px;
-margin-bottom:16px;
-}
-.goods-name{
-font-size:18px;font-weight:bold;margin-bottom:8px;color:#fff;
-}
-.goods-desc{
-font-size:13px;color:#999;margin-bottom:12px;line-height:1.4;
-}
-.goods-price{
-font-size:22px;color:#FF3333;font-weight:bold;margin-bottom:14px;
-}
-.buy-btn{
-width:100%;background:#FF4400;color:#fff;
-border:none;border-radius:8px;padding:12px;
-font-size:16px;font-weight:bold;cursor:pointer;
-transition:0.2s;
-}
-.buy-btn:active{background:#CC3300;transform:scale(0.98);}
-
-/* 弹窗 */
-.mask{
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.85);display:none;
-align-items:center;justify-content:center;z-index:999;
-}
-.buy-box{
-background:#1C1C22;width:90%;max-width:360px;
-border-radius:14px;border:1px solid #333;
-padding:25px 20px;
-}
-.buy-title{
-text-align:center;font-size:19px;color:#FF4400;margin-bottom:20px;
-}
-.input-item{margin-bottom:15px;}
-.input-item label{
-font-size:14px;color:#ccc;display:block;margin-bottom:6px;
-}
-.input-item input{
-width:100%;background:#141419;border:1px solid #333;
-border-radius:8px;padding:12px;color:#fff;font-size:15px;outline:none;
-}
-.pay-info{
-background:#141419;padding:12px;border-radius:8px;
-margin:10px 0;font-size:14px;color:#ddd;
-}
-.pay-info span{color:#FF3333;font-weight:bold;}
-.btn-group{display:flex;gap:10px;margin-top:15px;}
-.btn-pay{
-flex:1;background:#28C76F;color:#fff;border:none;
-border-radius:8px;padding:12px;font-size:15px;font-weight:bold;cursor:pointer;
-}
-.btn-close{
-flex:1;background:#444;color:#fff;border:none;
-border-radius:8px;padding:12px;font-size:15px;cursor:pointer;
-}
-.kami-show{
-background:#141419;border:1px dashed #FFCC00;
-border-radius:8px;padding:14px;text-align:center;
-color:#FFCC00;font-size:15px;margin-top:15px;display:none;word-break:break-all;
-}
-.pay-tip{text-align:center;font-size:12px;color:#FF6666;margin-top:10px;}
-
-/* 激活页面样式 */
-.active-box{
-background:#1A1A1F;border:1px solid #2A2A2F;
-border-radius:14px;padding:30px 25px;margin-top:20px;
-}
-.active-title{
-text-align:center;font-size:20px;color:#FF4400;
-margin-bottom:25px;font-weight:bold;
-}
-.input-key{
-width:100%;background:#141419;border:1px solid #333;
-border-radius:8px;padding:14px;color:#fff;font-size:16px;outline:none;
-letter-spacing:1px;margin-bottom:20px;
-}
-.btn-active{
-width:100%;background:#FF4400;color:#fff;border:none;
-border-radius:8px;padding:14px;font-size:16px;font-weight:bold;cursor:pointer;
-}
-.btn-active:active{background:#CC3300;transform:scale(0.98);}
-.success{
-text-align:center;color:#28C76F;font-size:16px;margin-top:20px;display:none;
-}
-.error{
-text-align:center;color:#FF3333;font-size:14px;margin-top:15px;display:none;
-}
-.tip{
-text-align:center;font-size:12px;color:#999;margin-top:15px;line-height:1.4;
-}
-
-/* 底部版权 */
-.footer{
-text-align:center;
-font-size:12px;
-color:#666;
-padding:20px;
-margin-top:20px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应咉粉丝购买平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.8;
+        }
+        .notice {
+            background: #ff6b3522;
+            color: #ffcc00;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+        }
+        .tabs {
+            display: flex;
+            background: #1e1e1e;
+        }
+        .tab-item {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab-item.active {
+            color: #ff6b35;
+            border-bottom: 3px solid #ff6b35;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        .tab-content.show {
+            display: block;
+        }
+        .goods-card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .goods-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .goods-desc {
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .goods-price {
+            font-size: 2rem;
+            color: #ff3333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .buy-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
+    <div class="header">
+        <h1>应咉粉丝购买平台</h1>
+        <p>24小时自助购卡 | 自动发卡 | 粉丝专属</p>
+    </div>
+    <div class="notice">
+        收款方：洗头师傅应咉，有问题联系客服处理！
+    </div>
+    <div class="tabs">
+        <div class="tab-item active" onclick="switchPage(0)">购卡中心</div>
+        <div class="tab-item" onclick="switchPage(1)">密钥激活</div>
+    </div>
 
-<div class="header">
-<h1>小文粉丝购买平台</h1>
-<p>24小时自助购卡 | 自动发卡 | 粉丝专属</p>
-</div>
+    <div class="tab-content show" id="tab0">
+        <div class="goods-card">
+            <h3 class="goods-title">小文回关</h3>
+            <p class="goods-desc">小文专属回关福利，粉丝专属特权，购卡立即生效</p>
+            <div class="goods-price">¥19.9</div>
+            <a href="tencent://message/?uin=2557068271&Site=&Menu=yes" class="buy-btn">立即购买</a>
+        </div>
+        <div class="goods-card">
+            <h3 class="goods-title">哈哈公主回关</h3>
+            <p class="goods-desc">购买后哈哈公主主动回关，永久有效，秒处理</p>
+            <div class="goods-price">¥199.9</div>
+            <a href="tencent://message/?uin=2557068271&Site=&Menu=yes" class="buy-btn">立即购买</a>
+        </div>
+        <div class="goods-card">
+            <h3 class="goods-title">大王回关</h3>
+            <p class="goods-desc">大王专属回关服务，购卡即安排，稳定靠谱</p>
+            <div class="goods-price">¥399.9</div>
+            <a href="tencent://message/?uin=2557068271&Site=&Menu=yes" class="buy-btn">立即购买</a>
+        </div>
+    </div>
 
-<!-- 公告 -->
-<div class="notice">
-📢 重要公告：购卡后自动发卡，激活即可使用，收款方：神秘人，有问题联系客服处理！
-</div>
+    <div class="tab-content" id="tab1">
+        <div class="goods-card">
+            <h3 class="goods-title">密钥激活</h3>
+            <p class="goods-desc">购买后请联系客服QQ获取激活码</p>
+            <input type="text" placeholder="请输入激活码" style="width:100%;padding:12px;margin:15px 0;border-radius:8px;border:none;">
+            <button class="buy-btn">立即激活</button>
+        </div>
+    </div>
 
-<!-- 菜单：购卡 / 激活 -->
-<div class="nav">
-<div class="item active" onclick="switchPage(0)">购卡中心</div>
-<div class="item" onclick="switchPage(1)">密钥激活</div>
-</div>
-
-<!-- 购卡页面 -->
-<div class="container show" id="page0">
-<!-- 商品1 -->
-<div class="goods-item">
-<div class="goods-name">小文回归</div>
-<div class="goods-desc">小文专属回归福利，粉丝专属特权，购卡立即生效</div>
-<div class="goods-price">¥9.9</div>
-<button class="buy-btn" onclick="openBuy('小文回归','9.9')">立即购买</button>
-</div>
-<!-- 商品2 -->
-<div class="goods-item">
-<div class="goods-name">哈哈公主回关</div>
-<div class="goods-desc">购买后哈哈公主主动回关，永久有效，秒处理</div>
-<div class="goods-price">¥19.9</div>
-<button class="buy-btn" onclick="openBuy('哈哈公主回关','19.9')">立即购买</button>
-</div>
-<!-- 商品3 -->
-<div class="goods-item">
-<div class="goods-name">大王回关</div>
-<div class="goods-desc">大王专属回关服务，购卡即安排，稳定靠谱</div>
-<div class="goods-price">¥29.9</div>
-<button class="buy-btn" onclick="openBuy('大王回关','29.9')">立即购买</button>
-</div>
-</div>
-
-<!-- 激活页面 -->
-<div class="container" id="page1">
-<div class="active-box">
-<div class="active-title">卡密密钥激活</div>
-<input type="text" class="input-key" id="key" placeholder="请输入ks7891nb666开头的卡密">
-<button class="btn-active" onclick="activeKey()">立即激活</button>
-<div class="error" id="errTip">密钥错误，请检查后重试！</div>
-<div class="success" id="okTip">激活成功！您已获得对应权限！</div>
-<div class="tip">
-密钥为购买的卡密<br>前缀：ks7891nb666<br>收款方：神秘人
-</div>
-</div>
-</div>
-
-<!-- 购买弹窗 -->
-<div class="mask" id="mask">
-<div class="buy-box">
-<div class="buy-title" id="buyTitle">购买商品</div>
-<div class="input-item">
-<label>你的快手ID/账号</label>
-<input type="text" id="userAccount" placeholder="请输入要办理的快手账号">
-</div>
-<div class="pay-info">
-支付金额：<span id="payPrice">0.0</span> 元
-</div>
-<div class="kami-show" id="kamiBox">
-您的专属卡密：<br><span id="kamiCode">ks7891nb666-733508</span>
-</div>
-<div class="pay-tip">收款方：神秘人</div>
-<div class="btn-group">
-<button class="btn-pay" onclick="toPay()">确认支付</button>
-<button class="btn-close" onclick="closeBuy()">关闭</button>
-</div>
-</div>
-</div>
-
-<!-- 底部 -->
-<div class="footer">
-小文粉丝平台 © 2026 版权所有
-</div>
-
-<script>
-// 切换页面
-function switchPage(idx){
-let items = document.querySelectorAll('.nav .item');
-let pages = document.querySelectorAll('.container');
-items.forEach((e,i)=>{
-e.classList.toggle('active',i==idx);
-});
-pages.forEach((e,i)=>{
-e.classList.toggle('show',i==idx);
-});
-}
-
-// 购卡功能
-let goodsName="",goodsPrice="";
-function openBuy(name,price){
-goodsName=name;goodsPrice=price;
-document.getElementById("buyTitle").innerText="购买："+name;
-document.getElementById("payPrice").innerText=price;
-document.getElementById("kamiBox").style.display="none";
-document.getElementById("mask").style.display="flex";
-}
-function closeBuy(){
-document.getElementById("mask").style.display="none";
-document
+    <script>
+        function switchPage(idx){
+            let tabs = document.querySelectorAll('.tab-item');
+            let pages = document.querySelectorAll('.tab-content');
+            tabs.forEach((e,i)=>{
+                e.classList.toggle('active', i==idx);
+            });
+            pages.forEach((e,i)=>{
+                e.classList.toggle('show', i==idx);
+            });
+        }
+    </script>
+</body>
+</html>
