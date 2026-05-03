@@ -86,41 +86,53 @@
             color: white;
             font-size: 1.2rem;
             text-align: center;
+            cursor: pointer;
         }
+
         /* 收款码弹窗 */
-        .pay-pop{
-            display:none;
-            position:fixed;
-            left:0;top:0;
-            width:100%;height:100%;
-            background:rgba(0,0,0,0.9);
-            z-index:999;
-            text-align:center;
-            padding-top:80px;
+        .pay-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            text-align: center;
+            padding-top: 60px;
         }
-        .pay-pop img{
-            width:280px;
-            border-radius:10px;
+        .pay-modal img {
+            width: 300px;
+            border-radius: 12px;
+            border: 3px solid #fff;
         }
-        .close-pop{
-            margin-top:20px;
-            padding:10px 25px;
-            background:#ff6b35;
-            border:none;
-            color:#fff;
-            border-radius:6px;
-            font-size:16px;
+        .pay-tip {
+            color: #ffcc00;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        .close-btn {
+            padding: 12px 30px;
+            background: #ff6b35;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>应咉粉丝购买平台</h1>
-        <p>24小时自助购卡 | 自动发卡 | 粉丝专属</p>
+        <p>24小时自助购卡 | 粉丝专属</p>
     </div>
     <div class="notice">
-        收款方：洗头师傅应咉，有问题联系客服QQ 2557068271 处理！
+        付款后联系客服QQ：2557068271 处理订单！
     </div>
+
     <div class="tabs">
         <div class="tab-item active" onclick="switchPage(0)">购卡中心</div>
         <div class="tab-item" onclick="switchPage(1)">密钥激活</div>
@@ -129,56 +141,75 @@
     <div class="tab-content show" id="tab0">
         <div class="goods-card">
             <h3 class="goods-title">小文回关</h3>
-            <p class="goods-desc">小文专属回关福利，粉丝专属特权，购卡立即生效</p>
+            <p class="goods-desc">小文专属回关福利，粉丝特权，购卡立即生效</p>
             <div class="goods-price">¥9.9</div>
-            <button class="buy-btn" onclick="openPay()">立即购买</button>
+            <button class="buy-btn" onclick="showPay(1)">立即购买 9.9 元</button>
         </div>
+
         <div class="goods-card">
             <h3 class="goods-title">哈哈公主回关</h3>
-            <p class="goods-desc">购买后哈哈公主主动回关，永久有效，秒处理</p>
+            <p class="goods-desc">购买后哈哈公主主动回关，永久有效</p>
             <div class="goods-price">¥199.9</div>
-            <button class="buy-btn" onclick="openPay()">立即购买</button>
+            <button class="buy-btn" onclick="showPay(2)">立即购买 199.9 元</button>
         </div>
+
         <div class="goods-card">
             <h3 class="goods-title">大王回关</h3>
-            <p class="goods-desc">大王专属回关服务，购卡即安排，稳定靠谱</p>
+            <p class="goods-desc">大王专属回关服务，购卡即安排</p>
             <div class="goods-price">¥399.9</div>
-            <button class="buy-btn" onclick="openPay()">立即购买</button>
+            <button class="buy-btn" onclick="showPay(3)">立即购买 399.9 元</button>
         </div>
     </div>
 
     <div class="tab-content" id="tab1">
         <div class="goods-card">
             <h3 class="goods-title">密钥激活</h3>
-            <p class="goods-desc">购买后请联系客服QQ 2557068271获取激活码</p>
+            <p class="goods-desc">无需密钥，付款后直接联系QQ办理即可</p>
             <input type="text" placeholder="请输入激活码" style="width:100%;padding:12px;margin:15px 0;border-radius:8px;border:none;">
             <button class="buy-btn">立即激活</button>
         </div>
     </div>
 
-    <!-- 收款码弹窗 不用跳转网页 直接弹出 -->
-    <div class="pay-pop" id="payPop">
-        <img src="mm_facetoface_collect_qrcode_1777561335297.png">
-        <p style="color:#ccc;margin-top:15px;">付款后联系QQ：2557068271</p>
-        <button class="close-pop" onclick="closePay()">关闭</button>
+    <!-- 收款码弹窗 -->
+    <div class="pay-modal" id="payModal">
+        <img id="payImg" src="">
+        <div class="pay-tip" id="payTip"></div>
+        <button class="close-btn" onclick="closePay()">关闭</button>
     </div>
 
     <script>
-        function switchPage(idx){
+        function switchPage(idx) {
             let tabs = document.querySelectorAll('.tab-item');
             let pages = document.querySelectorAll('.tab-content');
-            tabs.forEach((e,i)=>{
-                e.classList.toggle('active', i==idx);
-            });
-            pages.forEach((e,i)=>{
-                e.classList.toggle('show', i==idx);
-            });
+            tabs.forEach((e, i) => e.classList.toggle('active', i == idx));
+            pages.forEach((e, i) => e.classList.toggle('show', i == idx));
         }
-        function openPay(){
-            document.getElementById("payPop").style.display = "block";
+
+        // 对应三个价格的收款码
+        function showPay(type) {
+            let img = document.getElementById('payImg');
+            let tip = document.getElementById('payTip');
+            let modal = document.getElementById('payModal');
+
+            if (type == 1) {
+                // 9.9 元
+                img.src = "pay_9.9.png";
+                tip.innerText = "请扫码支付 9.9 元";
+            } else if (type == 2) {
+                // 199.9 元
+                img.src = "pay_199.9.png";
+                tip.innerText = "请扫码支付 199.9 元";
+            } else if (type == 3) {
+                // 399.9 元
+                img.src = "pay_399.9.png";
+                tip.innerText = "请扫码支付 399.9 元";
+            }
+
+            modal.style.display = "block";
         }
-        function closePay(){
-            document.getElementById("payPop").style.display = "none";
+
+        function closePay() {
+            document.getElementById('payModal').style.display = "none";
         }
     </script>
 </body>
